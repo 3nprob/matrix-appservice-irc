@@ -72,6 +72,17 @@ describe("Username generation", function() {
         expect(info.realname).toEqual("localhost:myreallylonguseridhere");
     });
 
+    it("should allow template userID", async function() {
+        var userId = "@mxuser:localhost";
+        const user = new MatrixUser(userId);
+        user.setDisplayName('bar');
+        ircClientConfig.getUsername = () => 'foo';
+        const info = await identGenerator.getIrcNames(ircClientConfig, {
+            getRealNameFormat: () => "template:$IRCUSER_$DISPLAY_$LOCALPART_$USERID_suffix",
+        }, user);
+        expect(info.realname).toEqual("foo_bar_mxuser_@mxuser:localhost_suffix");
+    });
+
     it("should start with '_1' on an occupied user ID", async function() {
         const userId = "@myreallylonguseridhere:localhost";
         const uname = "myreal_1";

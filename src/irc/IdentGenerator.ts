@@ -74,6 +74,12 @@ export class IdentGenerator {
         else if (server.getRealNameFormat() === "reverse-mxid") {
             realname = IdentGenerator.sanitiseRealname(IdentGenerator.switchAroundMxid(matrixUser));
         }
+        else if (server.getRealNameFormat().startsWith('template:')) {
+            realname = server.getRealNameFormat().replace(/^template:/, '').replace(/\$USERID/g, matrixUser.userId);
+            realname = realname.replace(/\$LOCALPART/g, matrixUser.localpart);
+            realname = realname.replace(/\$DISPLAY/g, matrixUser.getDisplayName() || '');
+            realname = realname.replace(/\$IRCUSER/g, username || '');
+        }
         else {
             throw Error('Invalid value for realNameFormat');
         }

@@ -387,7 +387,9 @@ ircService:
         # through the bridge e.g. caller ID as there is no way to /ACCEPT.
         # Default: "" (no user modes)
         # userModes: "R"
-        # The format of the realname defined for users, either mxid or reverse-mxid
+        # The format of the realname defined for users.
+        # either "mxid", "reverse-mxid", or "template:TEMPLATE", where TEMPLATE must
+        # contain either of $USERID, $LOCALPART, $DISPLAY, $IRCUSER
         realnameFormat: "mxid"
         # The minimum time to wait between connection attempts if we were disconnected
         # due to throttling.

@@ -379,7 +379,7 @@ properties:
                                     type: "boolean"
                                 realnameFormat:
                                     type: "string"
-                                    enum: ["mxid","reverse-mxid"]
+                                    pattern: "^template:(\\$USERID|\\$LOCALPART|\\$DISPLAY|\\$IRCUSER)|^mxid$|reverse-mxid$"
                                 ipv6:
                                     type: "object"
                                     properties:
